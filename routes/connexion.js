@@ -20,13 +20,13 @@ if (once === false) {
 
 /* GET user listing. */
 router.get('/', function(req, res, next) {
-    res.render('');
+    res.render('register');
 });
 
 router.post('/', function(req, res, next) {
     connection.query('INSERT INTO `users`(`email`, `password`) VALUES ("nico@epitech.fr", "private_password2")', function(err, rows, fields) {
         if (err) throw err;
-        res.render('register');
+        res.redirect('/');
     });
 });
 
