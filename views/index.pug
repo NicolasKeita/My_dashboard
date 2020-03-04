@@ -6,4 +6,28 @@ block content
     h2= title_sub
 
   home_page_connexion
+    h3 Connexion
+    h3 Inscription
+
+  home_page_forms
+    home_page_form_connexion
+      form(method='POST' action='/register')
+        div.form-group
+          label(for='email_register') Email:
+          input#email_register.form-control(type='email', placeholder='name@email.com' name='email')
+        div.form-group
+          label(for='pw_register') Password:
+          input#pw_register.form-control(type='password' name='password')
+        button.btn.btn-primary(type='submit') Sign up
+
+    home_page_form_inscription
+      form(method='POST' action='/register')
+        div.form-group
+          label(for='email_inscription') Email:
+          input#email_inscription.form-control(type='email', placeholder='name@email.com' name='email')
+        div.form-group
+          label(for='pw_inscription') Password:
+          input#pw_inscription.form-control(type='password' name='password')
+        button.btn.btn-primary(type='submit') Sign up
+
 //-  p Welcome to #{title}

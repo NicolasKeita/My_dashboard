@@ -8,9 +8,23 @@ a {
 }
 
 home_page_title {
+  display:block;
   text-align: center;
 }
 
 home_page_connexion {
-  text-align: center;
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+}
+
+home_page_forms {
+  display: flex;
+  justify-content: center;
+}
+
+home_page_form_connexion {
+}
+
+home_page_form_inscription {
 }
