@@ -20,7 +20,7 @@ home_page_connexion {
 
 home_page_forms {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 home_page_form_connexion {
