@@ -1,33 +1,54 @@
 var express = require('express');
+var router = express.Router();
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
-var mysql   = require('mysql');
-var router = express.Router();
+var mysql   = require('sync-mysql');
 
-var connection = mysql.createConnection({
+var connection = new mysql({
     host    : 'localhost',
     user    : 'admin',
     password: '',
     database: 'test'
 });
 
-var once = false;
-if (once === false) {
-    connection.connect();
-    once = true;
-}
 
 /* GET user listing. */
 router.get('/', function(req, res, next) {
-    res.render('register');
+    res.redirect('dashboard');
 });
 
 router.post('/', function(req, res, next) {
-    connection.query('INSERT INTO `users`(`email`, `password`) VALUES ("nico@epitech.fr", "private_password2")', function(err, rows, fields) {
-        if (err) throw err;
-        res.redirect('/');
-    });
+
+    const email_inscription = req.body.email;
+    const pw_inscription = req.body.password;
+
+    if (isAlreadyInDatabase(email_inscription)) {
+        if (isAlreadyInDatabase_password(email_inscription, pw_inscription)) {
+            res.redirect('dashboard');
+        } else {
+            const message_fail = "Sorry. Email found in our database but wrong password.";
+            res.render('connexion_failed', {message: message_fail});
+        }
+    } else {
+        const message_fail = "Sorry we cannot find this email in our database :" + email_inscription;
+        res.render('connexion_failed', {message: message_fail});
+    }
 });
+
+
+function isAlreadyInDatabase(email) {
+    const request_to_database = 'SELECT * FROM `users` WHERE `email` = "'
+        + email + '"';
+    const result = connection.query(request_to_database);
+    return !!result[0];
+}
+
+function isAlreadyInDatabase_password(email, password) {
+    const request_to_database = 'SELECT * FROM `users` WHERE (`email` = "'
+        + email + '" AND `password` = "'+ password + '")';
+    const result = connection.query(request_to_database);
+    return !!result[0];
+}
 
 module.exports = router;

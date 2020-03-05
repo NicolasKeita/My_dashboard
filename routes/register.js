@@ -12,16 +12,8 @@ var connection = new mysql({
     database: 'test'
 });
 
-/*
-var once = false;
-if (once === false) {
-    connection.connect();
-    once = true;
-}*/
-
-/* GET user listing. */
 router.get('/', function(req, res, next) {
-    res.render('');
+    res.render('register');
 });
 
 router.post('/', function(req, res, next) {
