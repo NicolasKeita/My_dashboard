@@ -4,16 +4,15 @@ var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//var mysql   = require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var registerRouter = require('./routes/register');
 var connexionRouter = require('./routes/connexion');
 var dashboardRouter = require('./routes/dashboard');
+var disconnectionRouter = require('./routes/disconnection');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,13 +22,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: "its a secret!"}));
+app.use(session({
+  secret: "cookie_secret",
+  name: "cookie_name",
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/index', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/connexion', connexionRouter);
+app.use('/disconnection', disconnectionRouter);
 app.use('/register', registerRouter);
 app.use('/users', usersRouter);
 
@@ -48,16 +53,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-/*
-var connection = mysql.createConnection({
-  host    : 'localhost',
-  user    : 'admin',
-  password: '',
-  database: 'test'
-});
-
-connection.connect();
-*/
 
 module.exports = app;

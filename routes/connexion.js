@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var path = require('path');
 var mysql   = require('sync-mysql');
 
 var connection = new mysql({
@@ -25,6 +22,7 @@ router.post('/', function(req, res, next) {
 
     if (isAlreadyInDatabase(email_inscription)) {
         if (isAlreadyInDatabase_password(email_inscription, pw_inscription)) {
+            req.session.is_connected = true;
             req.session.user_email_connected = email_inscription;
             req.session.user_password_connected = pw_inscription;
             res.redirect('dashboard');
