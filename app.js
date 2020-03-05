@@ -11,7 +11,8 @@ var registerRouter = require('./routes/register');
 var connexionRouter = require('./routes/connexion');
 var dashboardRouter = require('./routes/dashboard');
 var disconnectionRouter = require('./routes/disconnection');
-var connect_through_googleRouter = require('./routes/connect_through_google');
+var connectThroughGoogleRouter = require('./routes/connectThroughGoogle');
+var google_auth_redirect_after_loginRouter = require('./routes/google_auth_redirect_after_login');
 
 var app = express();
 
@@ -35,7 +36,8 @@ app.use('/', indexRouter);
 app.use('/index', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/connexion', connexionRouter);
-app.use('/connect_through_google', connect_through_googleRouter);
+app.use('/connect_through_google', connectThroughGoogleRouter);
+app.use('/google_auth_redirect_after_login', google_auth_redirect_after_loginRouter);
 app.use('/disconnection', disconnectionRouter);
 app.use('/register', registerRouter);
 app.use('/users', usersRouter);

@@ -1,6 +1,5 @@
-const {GoogleAuth} = require('google-auth-library');
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const {OAuth2Client} = require('google-auth-library');
 const http = require('http');
 const url = require('url');
@@ -11,9 +10,32 @@ const destroyer = require('server-destroy');
 const keys = require('../google_api_key_oauth2');
 
 router.get('/', async function(req, res, next) {
-    const oAuth2Client = await getAuthenticatedClient();
+    console.log("GET GOOGLE REQUEST");
+    if (!req.session.oAuth2Client) {
+        console.log("FETCHING ONE");
+        req.session.oAuth2Client = await getAuthenticatedClient();
+        console.log("Done with the FECHTIRREONE");
+    }
+    console.log("");
+    const oAuth2Client = req.session.oAuth2Client;
+    const url = 'https://people.googleapis.com/v1/people/me?personFields=names';
+    const res2 = await oAuth2Client.request({url});
+    console.log(res2.data);
+
+    // After acquiring an access_token, you may want to check on the audience, expiration,
+    // or original scopes requested.  You can do that with the `getTokenInfo` method.
+    const tokenInfo = await oAuth2Client.getTokenInfo(
+        oAuth2Client.credentials.access_token
+    );
+    console.log(tokenInfo);
+    console.log("ICI oauth2");
     console.log(oAuth2Client);
-    res.redirect('dashboard');
+
+//    await res.redirect('dashboard');
+});
+
+router.post('/', async function(req, res, next) {
+    console.log("POST GOOGLE REQUEST");
 });
 
 
@@ -31,18 +53,21 @@ function getAuthenticatedClient() {
             keys.web.redirect_uris[0]
         );
 
+        console.log("Ultra async 1");
         // Generate the url that will be used for the consent dialog.
         const authorizeUrl = oAuth2Client.generateAuthUrl({
-            access_type: 'offline',
+            access_type: 'online',
             scope: 'https://www.googleapis.com/auth/userinfo.profile',
         });
+        console.log("Ultra async 2");
 
         // Open an http server to accept the oauth callback. In this simple example, the
         // only request to our webserver is to /oauth2callback?code=<code>
         const server = http
             .createServer(async (req, res) => {
                 try {
-                    if (req.url.indexOf('/oauth2callback') > -1) {
+                    console.log("Trying to do stuff idk ..");
+                    if (req.url.indexOf('connect_through_google') > -1) {
                         // acquire the code from the querystring, and close the web server.
                         const qs = new url.URL(req.url, 'http://localhost:3000')
                             .searchParams;
@@ -57,14 +82,18 @@ function getAuthenticatedClient() {
                         oAuth2Client.setCredentials(r.tokens);
                         console.info('Tokens acquired.');
                         resolve(oAuth2Client);
+                    } else {
+                        console.log("ERRR INCONUNUNU");
                     }
                 } catch (e) {
+                    console.log("REJECT !");
                     reject(e);
                 }
             })
-            .listen(3001, () => {
+            .listen(3000, () => {
+                console.log("Ultra async 3 LISTENING");
                 // open the browser to the authorize url to start the workflow
-                open(authorizeUrl, {wait: false}).then(cp => cp.unref());
+                open(authorizeUrl, {wait: true}).then(cp => cp.unref());
             });
         destroyer(server);
     });

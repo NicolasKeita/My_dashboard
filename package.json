@@ -17,6 +17,7 @@
     "mysql": "^2.18.1",
     "open": "^7.0.2",
     "pug": "^2.0.4",
+    "query-string": "^6.11.1",
     "server-destroy": "^1.0.1",
     "sync-mysql": "^3.0.1"
   }
