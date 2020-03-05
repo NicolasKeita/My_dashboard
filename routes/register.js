@@ -30,10 +30,22 @@ router.post('/', function(req, res, next) {
         email_inscription + '", "' +
         pw_inscription + '")';
 
+    if (!isAlreadyInDatabase(email_inscription)) {
+        connection.query(request_to_database, function (err, rows, fields) {
+            if (err) throw err;
+            res.render('register', {user_mail: email_inscription});
+        });
+    }
+});
+
+function isAlreadyInDatabase(email) {
+    const request_to_database = 'SELECT * FROM `users` WHERE `email` = "'
+        + email + '"';
+
     connection.query(request_to_database, function(err, rows, fields) {
         if (err) throw err;
-        res.render('register', { user_mail: email_inscription });
+        return !!rows[0];
     });
-});
+}
 
 module.exports = router;
