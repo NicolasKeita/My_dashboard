@@ -25,6 +25,8 @@ router.post('/', function(req, res, next) {
 
     if (isAlreadyInDatabase(email_inscription)) {
         if (isAlreadyInDatabase_password(email_inscription, pw_inscription)) {
+            req.session.user_email_connected = email_inscription;
+            req.session.user_password_connected = pw_inscription;
             res.redirect('dashboard');
         } else {
             const message_fail = "Sorry. Email found in our database but wrong password.";
@@ -35,7 +37,6 @@ router.post('/', function(req, res, next) {
         res.render('connexion_failed', {message: message_fail});
     }
 });
-
 
 function isAlreadyInDatabase(email) {
     const request_to_database = 'SELECT * FROM `users` WHERE `email` = "'
