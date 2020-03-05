@@ -21,6 +21,7 @@ home_page_connexion {
 home_page_forms {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 30px;
 }
 
 home_page_form_connexion {
