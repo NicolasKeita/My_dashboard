@@ -11,13 +11,13 @@ block content
 
   home_page_forms
     home_page_form_connexion
-      form(method='POST' action='/register')
+      form(method='POST' action='/connexion')
         div.form-group
-          label(for='email_register') Email:
-          input#email_register.form-control(type='email', placeholder='name@email.com' name='email')
+          label(for='email_connexion') Email:
+          input#email_connexion.form-control(type='email', placeholder='name@email.com' name='email')
         div.form-group
-          label(for='pw_register') Password:
-          input#pw_register.form-control(type='password' name='password')
+          label(for='pw_connexion') Password:
+          input#pw_connexion.form-control(type='password' name='password')
         button.btn.btn-primary(type='submit') Sign up
 
     home_page_form_inscription

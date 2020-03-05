@@ -24,9 +24,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    connection.query('INSERT INTO `users`(`email`, `password`) VALUES ("nico@epitech.fr", "private_password2")', function(err, rows, fields) {
+    const email_inscription = req.body.email;
+    const pw_inscription = req.body.password;
+    const request_to_database = 'INSERT INTO `users`(`email`, `password`) VALUES ("' +
+        email_inscription + '", "' +
+        pw_inscription + '")';
+
+    connection.query(request_to_database, function(err, rows, fields) {
         if (err) throw err;
-        res.render('register');
+        res.render('register', { user_mail: email_inscription });
     });
 });
 
