@@ -19,7 +19,6 @@ router.get('/', async function(req, res, next) {
     const url = 'https://people.googleapis.com/v1/people/me?personFields=names';
     const res2 = await req.session.oAuth2Client.request({url});
 
-    console.log(res2.data);
     req.session.user_email_connected = res2.data.names[0].displayName;
 
     await res.redirect('dashboard');
