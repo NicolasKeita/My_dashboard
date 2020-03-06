@@ -36,7 +36,7 @@ app.use('/', indexRouter);
 app.use('/index', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/connexion', connexionRouter);
-app.use('/connect_through_google', connectThroughGoogleRouter);
+app.use('/connectThroughGoogle', connectThroughGoogleRouter);
 app.use('/google_auth_redirect_after_login', google_auth_redirect_after_loginRouter);
 app.use('/disconnection', disconnectionRouter);
 app.use('/register', registerRouter);
