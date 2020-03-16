@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var mysql   = require('sync-mysql');
+const express = require('express');
+const router = express.Router();
+const mysql   = require('sync-mysql');
 
-var connection = new mysql({
+const connection = new mysql({
     host    : 'localhost',
     user    : 'admin',
     password: '',
@@ -11,11 +11,11 @@ var connection = new mysql({
 
 
 /* GET user listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     res.redirect('dashboard');
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
 
     const email_inscription = req.body.email;
     const pw_inscription = req.body.password;

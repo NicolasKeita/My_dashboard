@@ -1,8 +1,8 @@
-var express = require('express');
-var mysql   = require('sync-mysql');
-var router = express.Router();
+const express = require('express');
+const mysql   = require('sync-mysql');
+const router = express.Router();
 
-var connection = new mysql({
+const connection = new mysql({
     host    : 'localhost',
     user    : 'admin',
     password: '',

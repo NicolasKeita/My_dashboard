@@ -1,4 +1,11 @@
-dashboard_title
-    h3 Votre dashboard : USER : #{user_mail}
-    a(href='disconnection') disconnection
+extends layout
+
+block content
+    dashboard_title
+        h3 Votre dashboard - USERNAME : #{user_mail}
+        a(href='disconnection') disconnection
+
+    dashboard_container_services
+        dashB_service1
+        dashB_service2
 

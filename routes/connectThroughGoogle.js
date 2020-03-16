@@ -49,13 +49,13 @@ function getAuthenticatedClient() {
             scope: 'https://www.googleapis.com/auth/userinfo.profile',
         });
 
-        // Open an http server to accept the oauth callback. In this simple example, the
+        // Open an http www to accept the oauth callback. In this simple example, the
         // only request to our webserver is to /oauth2callback?code=<code>
         const server = http
             .createServer(async (req, res) => {
                 try {
                     if (req.url.indexOf('google_auth_redirect_after_login') > -1) {
-                        // acquire the code from the querystring, and close the web server.
+                        // acquire the code from the querystring, and close the web www.
                         const qs = new url.URL(req.url, 'http://localhost:3000')
                             .searchParams;
                         const code = qs.get('code');

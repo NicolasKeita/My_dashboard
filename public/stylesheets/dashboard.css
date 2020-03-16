@@ -1,0 +1,23 @@
+
+dashboard_title {
+    display: block;
+    margin-bottom: 40px;
+    background-color: aquamarine;
+}
+
+dashboard_container_services {
+    display: flex;
+    background-color: chartreuse;
+}
+
+dashB_service1 {
+    width: 200px;
+    height: 100px;
+    background-color: blue;
+}
+
+dashB_service2 {
+    background-color: red;
+    width: 200px;
+    height: 100px;
+}
