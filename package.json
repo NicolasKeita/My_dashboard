@@ -1,6 +1,6 @@
 {
   "name": "my-dashboard",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "start": "node bin/www"
@@ -22,6 +22,7 @@
     "sync-mysql": "^3.0.1"
   },
   "devDependencies": {
+    "acorn": "^7.1.1",
     "@types/express": "^4.17.3"
   }
 }

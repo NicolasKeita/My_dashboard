@@ -1,35 +1,36 @@
 extends layout
 
 block content
-  home_page_title
-    h1= title
-    h2= title_sub
+  home_page
+    home_page_title
+      h1= title
+      h2= title_sub
 
-  home_page_connexion
-    h3 Connexion
-    h3 Inscription
+    home_page_connexion
+      h3 Connexion
+      h3 Inscription
 
-  home_page_forms
-    home_page_form_connexion
-      form(method='POST' action='/connexion')
-        div.form-group
-          label(for='email_connexion') Email:
-          input#email_connexion.form-control(type='email', placeholder='name@email.com' name='email')
-        div.form-group
-          label(for='pw_connexion') Password:
-          input#pw_connexion.form-control(type='password' name='password')
-        button.btn.btn-primary(type='submit') Sign up
+    home_page_forms
+      home_page_form_connexion
+        form(method='POST' action='/connexion')
+          div.form-group
+            label(for='email_connexion') Email:
+            input#email_connexion.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group
+            label(for='pw_connexion') Password:
+            input#pw_connexion.form-control(type='password' name='password')
+          button.btn.btn-primary(type='submit') Sign up
 
-    home_page_form_inscription
-      form(method='POST' action='/register')
-        div.form-group
-          label(for='email_inscription') Email:
-          input#email_inscription.form-control(type='email', placeholder='name@email.com' name='email')
-        div.form-group
-          label(for='pw_inscription') Password:
-          input#pw_inscription.form-control(type='password' name='password')
-        button.btn.btn-primary(type='submit') Inscription
+      home_page_form_inscription
+        form(method='POST' action='/register')
+          div.form-group
+            label(for='email_inscription') Email:
+            input#email_inscription.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group
+            label(for='pw_inscription') Password:
+            input#pw_inscription.form-control(type='password' name='password')
+          button.btn.btn-primary(type='submit') Inscription
 
-  a(href='connectThroughGoogle') Connect through Google
+    a(href='connectThroughGoogle') Connect through Google
 
 //-  p Welcome to #{title}
