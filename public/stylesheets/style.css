@@ -1,31 +1,10 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: darkgreen;
 }
 
 a {
   color: #00B7FF;
 }
 
-home_page_title {
-  display:block;
-  text-align: center;
-}
-
-home_page_connexion {
-  margin-top: 100px;
-  display: flex;
-  justify-content: space-around;
-}
-
-home_page_forms {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 30px;
-}
-
-home_page_form_connexion {
-}
-
-home_page_form_inscription {
-}

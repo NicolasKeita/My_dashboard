@@ -1,36 +1,82 @@
 extends layout
 
 block content
-  home_page
-    home_page_title
-      h1= title
-      h2= title_sub
+  home_page_title
+    h1= title
+    h2= title_sub
 
-    home_page_connexion
-      h3 Connexion
-      h3 Inscription
+  home_page_connexion
+    h3 Connexion
+    //h3 Inscription
 
-    home_page_forms
-      home_page_form_connexion
-        form(method='POST' action='/connexion')
-          div.form-group
-            label(for='email_connexion') Email:
-            input#email_connexion.form-control(type='email', placeholder='name@email.com' name='email')
-          div.form-group
-            label(for='pw_connexion') Password:
-            input#pw_connexion.form-control(type='password' name='password')
-          button.btn.btn-primary(type='submit') Sign up
+  home_page_forms
+    home_page_form_connexion
+      form(method='POST' action='/connexion')
+        label(for='email_connexion') Email:
+        input#email_connexion(type='email', placeholder='name@email.com' name='email')
+        label(for='pw_connexion') Password:
+        input#pw_connexion(type='password' name='password')
+        button(type='submit') Sign up
 
-      home_page_form_inscription
-        form(method='POST' action='/register')
-          div.form-group
-            label(for='email_inscription') Email:
-            input#email_inscription.form-control(type='email', placeholder='name@email.com' name='email')
-          div.form-group
-            label(for='pw_inscription') Password:
-            input#pw_inscription.form-control(type='password' name='password')
-          button.btn.btn-primary(type='submit') Inscription
+    //home_page_form_inscription
+      form(method='POST' action='/register')
+        label(for='email_inscription') Email:
+        input#email_inscription.form-control(type='email', placeholder='name@email.com' name='email')
+        label(for='pw_inscription') Password:
+        input#pw_inscription.form-control(type='password' name='password')
+        button(type='submit') Inscription
 
-    a(href='connectThroughGoogle') Connect through Google
 
-//-  p Welcome to #{title}
+    //a(href='connectThroughGoogle') Connect through Google
+
+  .limiter
+    .container-login100(style="background-image: url('/images/bg-01.jpg');")
+      .wrap-login100.p-l-110.p-r-110.p-t-62.p-b-33
+        form.login100-form.validate-form.flex-sb.flex-w
+          span.login100-form-title.p-b-53
+            | Sign In With
+          a.btn-face.m-b-20(href='#')
+            i.fa.fa-facebook-official
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Facebook
+          a.btn-google.m-b-20(href='#')
+            img(src='/images/icons/icon-google.png' alt='GOOGLE')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Google
+          .p-t-31.p-b-9
+            span.txt1
+              | Username
+          .wrap-input100.validate-input(data-validate='Username is required')
+            input.input100(type='text' name='username')
+            span.focus-input100
+          .p-t-13.p-b-9
+            span.txt1
+              | Password
+            a.txt2.bo1.m-l-5(href='#')
+              | Forgot?
+          .wrap-input100.validate-input(data-validate='Password is required')
+            input.input100(type='password' name='pass')
+            span.focus-input100
+          .container-login100-form-btn.m-t-17
+            button.login100-form-btn
+              | Sign In
+          .w-full.text-center.p-t-55
+            span.txt2
+              | Not a member?
+            a.txt2.bo1(href='#')
+              | Sign up now
+  #dropDownSelect1
+  // ===============================================================================================
+  script(src='/vendor/jquery/jquery-3.2.1.min.js')
+  // ===============================================================================================
+  script(src='/vendor/animsition/js/animsition.min.js')
+  // ===============================================================================================
+  script(src='/vendor/bootstrap/js/popper.js')
+  script(src='/vendor/bootstrap/js/bootstrap.min.js')
+  // ===============================================================================================
+  script(src='/vendor/select2/select2.min.js')
+  // ===============================================================================================
+  script(src='/vendor/daterangepicker/moment.min.js')
+  script(src='/vendor/daterangepicker/daterangepicker.js')
+  // ===============================================================================================
+  script(src='/vendor/countdowntime/countdowntime.js')
+  // ===============================================================================================
+  script(src='/js/main.js')

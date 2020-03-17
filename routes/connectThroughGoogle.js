@@ -69,8 +69,6 @@ function getAuthenticatedClient() {
                         oAuth2Client.setCredentials(r.tokens);
                         console.info('Tokens acquired.');
                         resolve(oAuth2Client);
-                    } else {
-                        console.log("[ERR DASHBOARD] Wrong URL in connectThroughGoogle.js line 70");
                     }
                 } catch (e) {
                     reject(e);
