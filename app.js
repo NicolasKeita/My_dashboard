@@ -7,7 +7,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
-const connexionRouter = require('./routes/connexion');
+const connectionRouter = require('./routes/connection');
 const dashboardRouter = require('./routes/dashboard');
 const disconnectionRouter = require('./routes/disconnection');
 const connectThroughGoogleRouter = require('./routes/connectThroughGoogle');
@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/index', indexRouter);
 app.use('/dashboard', dashboardRouter);
-app.use('/connexion', connexionRouter);
+app.use('/connection', connectionRouter);
 app.use('/connectThroughGoogle', connectThroughGoogleRouter);
 app.use('/disconnection', disconnectionRouter);
 app.use('/register', registerRouter);
