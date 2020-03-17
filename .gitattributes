@@ -1,0 +1,3 @@
+public/vendor/* linguist-vendored
+public/stylesheets/main.css linguist-vendored
+public/stylesheets/util.css linguist-vendored

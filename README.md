@@ -8,6 +8,8 @@ Here are some images from the website. EVERYTHING you see is fully working.
 
 ## Usage
 
+This project works fine OUT OF THE BOX. **Easy & Fast - Download & Play !**
+
 docker build && docker up
 
 This README.md is not finished (at all)
