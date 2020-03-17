@@ -5,23 +5,6 @@ block content
     h1= title
     h2= title_sub
 
-  //home_page_connexion
-    //h3 Connexion
-    //h3 Inscription
-
-  home_page_forms
-
-    //home_page_form_inscription
-      form(method='POST' action='/register')
-        label(for='email_inscription') Email:
-        input#email_inscription.form-control(type='email', placeholder='name@email.com' name='email')
-        label(for='pw_inscription') Password:
-        input#pw_inscription.form-control(type='password' name='password')
-        button(type='submit') Inscription
-
-
-    //a(href='connectThroughGoogle') Connect through Google
-
   .limiter
     .container-login100(style="background-image: url('/images/bg-01.jpg');")
       .wrap-login100.p-l-110.p-r-110.p-t-62.p-b-33
@@ -52,7 +35,7 @@ block content
           .w-full.text-center.p-t-55
             span.txt2
               | Not a member?
-            a.txt2.bo1(href='#')
+            a.txt2.bo1(href='/register')
               | Sign up now
 
   script(src='/vendor/jquery/jquery-3.2.1.min.js')

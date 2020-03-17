@@ -3,11 +3,20 @@ const router = express.Router();
 const mysql   = require('mysql');
 
 router.get('/', function(req, res) {
-    res.redirect('dashboard');
+    if (req.session.is_connected) {
+        res.render('dashboard', {
+            user_mail: req.session.user_email_connected
+        });
+    } else {
+        res.render('connection', {
+            title: 'Nicolas Super Dashboard',
+            title_sub: 'Hard work beats talent every time'
+        });
+    }
 });
 
-router.post('/', function(req, res) {
-
+router.post('/', function(req, res)
+{
     const email_inscription = req.body.email;
     const pw_inscription = req.body.password;
 

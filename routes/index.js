@@ -8,10 +8,7 @@ router.get('/', function(req, res) {
       user_mail: req.session.user_email_connected
     });
   } else {
-    res.render('index', {
-      title: 'Nicolas Super Dashboard',
-      title_sub: 'Hard work beats talent every time'
-    });
+    res.redirect('connection');
   }
 });
 
