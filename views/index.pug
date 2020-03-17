@@ -5,18 +5,11 @@ block content
     h1= title
     h2= title_sub
 
-  home_page_connexion
-    h3 Connexion
+  //home_page_connexion
+    //h3 Connexion
     //h3 Inscription
 
   home_page_forms
-    home_page_form_connexion
-      form(method='POST' action='/connexion')
-        label(for='email_connexion') Email:
-        input#email_connexion(type='email', placeholder='name@email.com' name='email')
-        label(for='pw_connexion') Password:
-        input#pw_connexion(type='password' name='password')
-        button(type='submit') Sign up
 
     //home_page_form_inscription
       form(method='POST' action='/register')
@@ -61,20 +54,13 @@ block content
               | Not a member?
             a.txt2.bo1(href='#')
               | Sign up now
-  #dropDownSelect1
-  // ===============================================================================================
+
   script(src='/vendor/jquery/jquery-3.2.1.min.js')
-  // ===============================================================================================
   script(src='/vendor/animsition/js/animsition.min.js')
-  // ===============================================================================================
   script(src='/vendor/bootstrap/js/popper.js')
   script(src='/vendor/bootstrap/js/bootstrap.min.js')
-  // ===============================================================================================
   script(src='/vendor/select2/select2.min.js')
-  // ===============================================================================================
   script(src='/vendor/daterangepicker/moment.min.js')
   script(src='/vendor/daterangepicker/daterangepicker.js')
-  // ===============================================================================================
   script(src='/vendor/countdowntime/countdowntime.js')
-  // ===============================================================================================
   script(src='/js/main.js')
