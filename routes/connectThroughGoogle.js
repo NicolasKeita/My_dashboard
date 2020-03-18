@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {OAuth2Client} = require('google-auth-library');
+const { google } = require('googleapis');
 const http = require('http');
 const url = require('url');
 const open = require('open');
@@ -9,25 +9,30 @@ const destroyer = require('server-destroy');
 // Download your OAuth2 configuration from the Google
 const keys = require('../google_api_key_oauth2');
 
-router.get('/', async function(req, res, next) {
+router.get('/', async function(req, res)
+{
     req.session.oAuth2Client = await getAuthenticatedClient();
-    req.session.is_connected = true;
 
-    console.log("ICI OAUTH", req.session.oAuth2Client, "\n\n"); // TODO remove
+    let servicePeopleAPI = new google.people({
+        version: 'v1',
+        auth: req.session.oAuth2Client
+    });
+    await new Promise(function(resolve) {
+        servicePeopleAPI.people.get({
+            resourceName: 'people/me',
+            personFields: 'emailAddresses,addresses,names,metadata,phoneNumbers'
+        }, (err, res) => {
+            if (err) return console.error('The API returned an error: ' + err);
+            const emailAddresses = res.data.emailAddresses;
+            if (!emailAddresses) return console.error('connectThourghGoogle.js line28 Err unknown');
+            req.session.user_email_connected = emailAddresses[0].value;
+            req.session.is_connected = true;
+            resolve();
+        });
+    });
 
-   // API call to fetch the username
-    const url = 'https://people.googleapis.com/v1/people/me?personFields=names';
-    const res2 = await req.session.oAuth2Client.request({url});
-
-    req.session.user_email_connected = res2.data.names[0].displayName;
-
-    await res.redirect('dashboard');
+    res.redirect('dashboard');
 });
-
-router.post('/', async function(req, res, next) {
-    console.log("POST GOOGLE REQUEST");
-});
-
 
 /**
  * Create a new OAuth2Client, and go through the OAuth2 content
@@ -37,16 +42,22 @@ function getAuthenticatedClient() {
     return new Promise((resolve, reject) => {
         // create an oAuth client to authorize the API call.  Secrets are kept in a `keys.json` file,
         // which should be downloaded from the Google Developers Console.
-        const oAuth2Client = new OAuth2Client(
+        const oAuth2Client = new google.auth.OAuth2(
             keys.web.client_id,
             keys.web.client_secret,
             keys.web.redirect_uris[0]
         );
 
+        const scopes = [
+            // Google PEOPLE API
+            'profile',
+            'email',
+        ];
+
         // Generate the url that will be used for the consent dialog.
         const authorizeUrl = oAuth2Client.generateAuthUrl({
             access_type: 'offline',
-            scope: 'https://www.googleapis.com/auth/userinfo.profile',
+            scope: scopes
         });
 
         // Open an http www to accept the oauth callback. In this simple example, the
@@ -55,19 +66,13 @@ function getAuthenticatedClient() {
             .createServer(async (req, res) => {
                 try {
                     if (req.url.indexOf('google_auth_redirect_after_login') > -1) {
-                        // acquire the code from the querystring, and close the web www.
                         const qs = new url.URL(req.url, 'http://localhost:3000')
                             .searchParams;
                         const code = qs.get('code');
-                        console.log(`Code is ${code}`);
                         res.end('Authentication successful! You can close this window.');
                         server.destroy();
-
-                        // Now that we have the code, use that to acquire tokens.
                         const r = await oAuth2Client.getToken(code);
-                        // Make sure to set the credentials on the OAuth2 client.
                         oAuth2Client.setCredentials(r.tokens);
-                        console.info('Tokens acquired.');
                         resolve(oAuth2Client);
                     }
                 } catch (e) {
