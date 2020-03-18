@@ -26,25 +26,32 @@ router.post('/', async function(req, res) {
         database: 'test'
     });
 
-    if (!isAlreadyInDatabase(email_inscription, connection))
+    if (!await isAlreadyInDatabase(email_inscription, connection))
     {
         const request_to_database = 'INSERT INTO `users`(`email`, `password`) VALUES ("' +
             email_inscription + '", "' +
             pw_inscription + '")';
-        const message_success = "Congratulations, you have successfully register :" + email_inscription;
-        connection.query(request_to_database);
-        res.render('register', {message: message_success});
+        await connection.query(request_to_database);
+        req.session.user_email_connected = email_inscription;
+        req.session.user_password_connected = pw_inscription;
+        req.session.is_connected = true;
+        res.render('dashboard', {
+            user_mail: req.session.user_email_connected
+        });
     } else {
         const message_fail = "This user already exist in our database :" + email_inscription;
-        res.render('register', {message: message_fail});
+        res.render('connection_failed', {message: message_fail});
     }
 });
 
 function isAlreadyInDatabase(email, connection) {
     const request_to_database = 'SELECT * FROM `users` WHERE `email` = "'
         + email + '"';
-    const result = connection.query(request_to_database);
-    return !!result[0];
+    return new Promise(function(resolve) {
+        connection.query(request_to_database, (err, rows) => {
+            resolve(!!rows[0]);
+        });
+    });
 }
 
 module.exports = router;

@@ -45,15 +45,14 @@ router.post('/', function(req, res)
                 req.session.is_connected = true;
                 req.session.user_email_connected = email_inscription;
                 req.session.user_password_connected = pw_inscription;
-                console.log("RENDER dashboard");
                 res.redirect('dashboard');
             } else {
                 const message_fail = "Sorry. Email found in our database but wrong password.";
-                res.render('connexion_failed', {message: message_fail});
+                res.render('connection_failed', {message: message_fail});
             }
         } else {
             const message_fail = "Sorry we cannot find this email in our database :" + email_inscription;
-            res.render('connexion_failed', {message: message_fail});
+            res.render('connection_failed', {message: message_fail});
         }
     });
 });
