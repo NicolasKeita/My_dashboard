@@ -7,10 +7,14 @@ block content
 
     .dashboard_container_widgets
         .dashB_widget1
-            h3.text-white Youtube - Video views count
-            form(method='POST' action='/youtubeViewCountWidget')
+            h3.text-white Youtube - Video Channel Information
+            form(method='POST' action='/youtubeChannelInformationWidget')
                 input(name='searchText' placeholder='video URL')
-            h3.p-t-50.text-white #{youtubeViewCount}
+            - if (typeof(channelViewCount) !== 'undefined') {
+                h3.p-t-50.text-white This Youtube channel has #{channelViewCount} views
+                h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount} subscribers
+                h3.p-t-50.text-white This Youtube channel has #{channelVideoCount} videos
+            - }
         .dashB_widget2
             h3.text-white GoogleMap
             form(method='POST' action='/googleMapWidget')
@@ -25,4 +29,4 @@ block content
             form(method='POST' action='/movieWidget')
                 input(name='searchText' placeholder='Movie')
 
-    script(src='/js/youtubeViewCountWidget.js')
+    script(src='/js/youtubeChannelInformationWidget.js.js')
