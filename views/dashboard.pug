@@ -7,21 +7,27 @@ block content
 
     .dashboard_container_widgets
         .dashB_widget1
-            h3.text-white Youtube - Video Channel Information
+            h3.text-white Youtube - Channel Information
             form(method='POST' action='/youtubeChannelInformationWidget')
-                input(name='searchText' placeholder='video URL')
+                input(name='searchText' placeholder='channel name')
             - if (typeof(channelViewCount) !== 'undefined') {
                 h3.p-t-50.text-white This Youtube channel has #{channelViewCount} views
                 h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount} subscribers
                 h3.p-t-50.text-white This Youtube channel has #{channelVideoCount} videos
             - }
         .dashB_widget2
-            h3.text-white GoogleMap
-            form(method='POST' action='/googleMapWidget')
-                input(name='searchText' placeholder='Location')
+            h3.text-white Youtube - Video Information
+            form(method='POST' action='/youtubeVideoInformationWidget')
+                input(name='searchText' placeholder='video name')
+            - if (typeof(youtubeVideoTitle) !== 'undefined') {
+                h3.p-t-50.text-white Video title: #{youtubeVideoTitle}
+                h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate}
+                h3.p-t-50.text-white Video ID: #{youtubeVideoId}
+                h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle}
+            - }
     .dashboard_container_widgets
         .dashB_widget3
-            h3.text-white Weather
+            h3.text-white Weather or GoogleMap
             form(method='POST' action='/weatherWidget')
                 input(name='searchText' placeholder='City')
         .dashB_widget4

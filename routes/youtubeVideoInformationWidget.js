@@ -15,25 +15,29 @@ router.post('/', async function(req, res)
 
     let service = google.youtube('v3');
 
-    let channelViewCount = "Not Found";
-    let channelSubscriberCount = "Not Found";
-    let channelVideoCount = "Not Found";
+    let youtubeVideoId = "Not Found";
+    let youtubeVideoPublishedDate = "Not Found";
+    let youtubeVideoTitle = "Not Found";
+    let youtubeVideoChannelTitle = "Not Found";
 
     await new Promise((resolve) => {
-        service.channels.list({
+        service.search.list({
             auth: oAuth2Client,
-            part: 'snippet,contentDetails,statistics',
-            forUsername: req.body.searchText
+            type: 'video',
+            part: 'snippet',
+            q: req.body.searchText
         }, function (err, response) {
             if (err) {
                 console.error('The API returned an error: ' + err);
                 return;
             }
             let channels = response.data.items;
+            console.log(channels);
             if (channels.length !== 0) {
-                channelViewCount = channels[0].statistics.viewCount;
-                channelSubscriberCount = channels[0].statistics.subscriberCount;
-                channelVideoCount = channels[0].statistics.videoCount;
+                youtubeVideoId = channels[0].id.videoId;
+                youtubeVideoPublishedDate = channels[0].snippet.publishedAt;
+                youtubeVideoTitle = channels[0].snippet.title;
+                youtubeVideoChannelTitle = channels[0].snippet.channelTitle;
             }
             resolve();
         });
@@ -41,9 +45,10 @@ router.post('/', async function(req, res)
 
     res.render('dashboard', {
         user_mail: req.session.user_email_connected,
-        channelViewCount : channelViewCount,
-        channelSubscriberCount : channelSubscriberCount,
-        channelVideoCount : channelVideoCount
+        youtubeVideoId : youtubeVideoId,
+        youtubeVideoPublishedDate : youtubeVideoPublishedDate,
+        youtubeVideoTitle : youtubeVideoTitle,
+        youtubeVideoChannelTitle : youtubeVideoChannelTitle
     });
 });
 

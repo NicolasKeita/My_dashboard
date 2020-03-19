@@ -12,6 +12,7 @@ const dashboardRouter = require('./routes/dashboard');
 const disconnectionRouter = require('./routes/disconnection');
 const connectThroughGoogleRouter = require('./routes/connectThroughGoogle');
 const youtubeChannelInformationWidgetRouter = require('./routes/youtubeChannelInformationWidget');
+const youtubeVideoInformationWidgetRouter = require('./routes/youtubeVideoInformationWidget');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/connectThroughGoogle', connectThroughGoogleRouter);
 app.use('/disconnection', disconnectionRouter);
 app.use('/register', registerRouter);
 app.use('/youtubeChannelInformationWidget', youtubeChannelInformationWidgetRouter);
+app.use('/youtubeVideoInformationWidget', youtubeVideoInformationWidgetRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

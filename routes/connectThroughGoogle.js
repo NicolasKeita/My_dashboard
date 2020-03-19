@@ -55,7 +55,9 @@ function getAuthenticatedClient(oAuth2Client) {
             'email',
 
             // Google YOUTUBE API
-            'https://www.googleapis.com/auth/youtube.readonly'
+            'https://www.googleapis.com/auth/youtube.readonly',
+            'https://www.googleapis.com/auth/youtube',
+            'https://www.googleapis.com/auth/youtube.force-ssl'
         ];
 
         // Generate the url that will be used for the consent dialog.
