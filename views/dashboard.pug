@@ -9,19 +9,20 @@ block content
         .dashB_widget1
             h3.text-white Youtube - Video views count
             form(method='POST' action='/youtubeViewCountWidget')
-                input(name='email' placeholder='video URL')
+                input(name='searchText' placeholder='video URL')
+            h3.p-t-50.text-white #{youtubeViewCount}
         .dashB_widget2
             h3.text-white GoogleMap
             form(method='POST' action='/googleMapWidget')
-                input
+                input(name='searchText' placeholder='Location')
     .dashboard_container_widgets
         .dashB_widget3
             h3.text-white Weather
             form(method='POST' action='/weatherWidget')
-                input
-    .dashB_widget4
+                input(name='searchText' placeholder='City')
+        .dashB_widget4
             h3.text-white Movie
             form(method='POST' action='/movieWidget')
-                input
+                input(name='searchText' placeholder='Movie')
 
-
+    script(src='/js/youtubeViewCountWidget.js')

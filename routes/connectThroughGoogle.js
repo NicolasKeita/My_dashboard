@@ -11,11 +11,19 @@ const keys = require('../google_api_key_oauth2');
 
 router.get('/', async function(req, res)
 {
-    req.session.oAuth2Client = await getAuthenticatedClient();
+    const oAuth2Client = new google.auth.OAuth2(
+        keys.web.client_id,
+        keys.web.client_secret,
+        keys.web.redirect_uris[0]
+    );
+
+    const tokens = await getAuthenticatedClient(oAuth2Client);
+    oAuth2Client.setCredentials(tokens);
+    req.session.GoogleOAuth2Tokens = tokens;
 
     let servicePeopleAPI = new google.people({
         version: 'v1',
-        auth: req.session.oAuth2Client
+        auth: oAuth2Client
     });
     await new Promise(function(resolve) {
         servicePeopleAPI.people.get({
@@ -38,20 +46,16 @@ router.get('/', async function(req, res)
  * Create a new OAuth2Client, and go through the OAuth2 content
  * workflow.  Return the full client to the callback.
  */
-function getAuthenticatedClient() {
+function getAuthenticatedClient(oAuth2Client) {
     return new Promise((resolve, reject) => {
-        // create an oAuth client to authorize the API call.  Secrets are kept in a `keys.json` file,
-        // which should be downloaded from the Google Developers Console.
-        const oAuth2Client = new google.auth.OAuth2(
-            keys.web.client_id,
-            keys.web.client_secret,
-            keys.web.redirect_uris[0]
-        );
 
         const scopes = [
             // Google PEOPLE API
             'profile',
             'email',
+
+            // Google YOUTUBE API
+            'https://www.googleapis.com/auth/youtube.readonly'
         ];
 
         // Generate the url that will be used for the consent dialog.
@@ -72,8 +76,7 @@ function getAuthenticatedClient() {
                         res.end('Authentication successful! You can close this window.');
                         server.destroy();
                         const r = await oAuth2Client.getToken(code);
-                        oAuth2Client.setCredentials(r.tokens);
-                        resolve(oAuth2Client);
+                        resolve(r.tokens);
                     }
                 } catch (e) {
                     reject(e);

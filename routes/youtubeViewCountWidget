@@ -1,0 +1,60 @@
+const express = require('express');
+const router = express.Router();
+const { google } = require('googleapis');
+
+const keys = require('../google_api_key_oauth2');
+
+router.post('/', function(req, res)
+{
+    const oAuth2Client = new google.auth.OAuth2(
+        keys.web.client_id,
+        keys.web.client_secret,
+        keys.web.redirect_uris[0]
+    );
+
+    oAuth2Client.setCredentials(req.session.GoogleOAuth2Tokens);
+
+    let youtubeViewCount = 4;
+    let service = google.youtube('v3');
+
+    service.channels.list({
+        auth: oAuth2Client,
+        part: 'snippet,contentDetails,statistics',
+        forUsername: req.body.searchText
+    }, function(err, response) {
+        if (err) {
+            console.log('The API returned an error: ' + err);
+            return;
+        }
+        let channels = response.data.items;
+        if (channels.length === 0) {
+            console.log('No channel found.');
+        } else {
+           console.log(channels[0].statistics);
+            /*
+            console.log('This channel\'s ID is %s. Its title is \'%s\', and ' +
+                'it has %s views.',
+                channels[0].id,
+                channels[0].snippet.title,
+                channels[0].statistics.viewCount);
+            */
+        }
+    });
+
+    res.render('dashboard', {
+        user_mail: req.session.user_email_connected,
+        youtubeViewCount: youtubeViewCount.toString()
+    });
+});
+
+router.get('/', function(req, res) {
+    if (req.session.is_connected) {
+        res.render('dashboard', {
+            user_mail: req.session.user_email_connected
+        });
+    } else {
+        res.redirect('connection');
+    }
+});
+
+module.exports = router;
