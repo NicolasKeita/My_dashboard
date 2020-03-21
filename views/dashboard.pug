@@ -28,8 +28,9 @@ block content
     .dashboard_container_widgets
         .dashB_widget3
             h3.text-white GoogleMap
-            input(name='searchText' placeholder='City' id="inputLatitude")
-            button(type='button' onclick='initMap();') Get Value
+            input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude")
+            input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude")
+            button(type='button' onclick='initMap();') Locate
             script(src='/js/youtubeViewCountWidget.js')
             #map
         .dashB_widget4
