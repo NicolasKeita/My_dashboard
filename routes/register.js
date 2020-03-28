@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const router = express.Router();
+const _checkRegister = require('../public/js/register');
 
 router.get('/', function(req, res) {
     if (req.session.is_connected) {
@@ -26,12 +27,18 @@ router.post('/', async function(req, res) {
         database: 'test'
     });
 
+    /*
     if (!await isAlreadyInDatabase(email_inscription, connection))
     {
         const request_to_database = 'INSERT INTO `users`(`email`, `password`) VALUES ("' +
             email_inscription + '", "' +
             pw_inscription + '")';
         await connection.query(request_to_database);
+        */
+
+    if (await _checkRegister(email_inscription, pw_inscription)) {
+
+
         req.session.user_email_connected = email_inscription;
         req.session.user_password_connected = pw_inscription;
         req.session.is_connected = true;

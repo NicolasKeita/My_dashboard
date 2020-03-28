@@ -6,7 +6,6 @@ const url = require('url');
 const open = require('open');
 const destroyer = require('server-destroy');
 
-// Download your OAuth2 configuration from the Google
 const keys = require('../google_api_key_oauth2');
 
 router.get('/', async function(req, res)
@@ -16,11 +15,31 @@ router.get('/', async function(req, res)
         keys.web.client_secret,
         keys.web.redirect_uris[0]
     );
+        const scopes = [
+            // Google PEOPLE API
+            'profile',
+            'email',
 
-    const tokens = await getAuthenticatedClient(oAuth2Client);
+            // Google YOUTUBE API
+            'https://www.googleapis.com/auth/youtube.readonly',
+            'https://www.googleapis.com/auth/youtube',
+            'https://www.googleapis.com/auth/youtube.force-ssl'
+        ];
+
+        // Generate the url that will be used for the consent dialog.
+        const authorizeUrl = oAuth2Client.generateAuthUrl({
+            access_type: 'offline',
+            scope: scopes
+        });
+
+
+    res.redirect(authorizeUrl);
+    /*
+    const tokens = await getAuthenticatedClient(oAuth2Client, res);
     oAuth2Client.setCredentials(tokens);
     req.session.GoogleOAuth2Tokens = tokens;
-
+*/
+    /*
     let servicePeopleAPI = new google.people({
         version: 'v1',
         auth: oAuth2Client
@@ -40,13 +59,14 @@ router.get('/', async function(req, res)
     });
 
     res.redirect('dashboard');
+    */
 });
 
 /**
  * Create a new OAuth2Client, and go through the OAuth2 content
  * workflow.  Return the full client to the callback.
  */
-function getAuthenticatedClient(oAuth2Client) {
+function getAuthenticatedClient(oAuth2Client, res2) {
     return new Promise((resolve, reject) => {
 
         const scopes = [
@@ -84,9 +104,16 @@ function getAuthenticatedClient(oAuth2Client) {
                     reject(e);
                 }
             })
+            .on('error', (e) => {
+                if (e.code === 'EADDRINUSE') {
+                    console.log("Address, port combination already in use");
+                }
+            })
             .listen(3000, () => {
+                console.log("KKKKK");
+                res2.redirect(authorizeUrl);
                 // open the browser to the authorize url to start the workflow
-                open(authorizeUrl, {wait: false}).then(cp => cp.unref());
+                //open(authorizeUrl, {wait: false}).then(cp => cp.unref());
             });
         destroyer(server);
     });

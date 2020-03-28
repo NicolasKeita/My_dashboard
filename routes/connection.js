@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql   = require('mysql');
+const _checkRegister = require('../public/js/register');
+const _checkLogin = require('../public/js/connexion');
 
 router.get('/', function(req, res) {
     if (req.session.is_connected) {
@@ -15,17 +17,19 @@ router.get('/', function(req, res) {
     }
 });
 
-router.post('/', function(req, res)
+router.post('/', async function(req, res)
 {
     const email_inscription = req.body.email;
     const pw_inscription = req.body.password;
 
+    /*
     const connection = new mysql.createConnection({
-        host    : 'localhost',
+        host    : 'db',
         user    : 'admin',
-        password: '',
+        password: 'admin',
         database: 'test'
-    });
+    });*/
+    /*
     connection.connect(async function(err) {
         if (err) {
             console.error("Is the database Online ?\n");
@@ -33,15 +37,18 @@ router.post('/', function(req, res)
             const message_fail = "Connection failed to the database - " +
                 "host : 'localhost' - " +
                 "user : 'admin' - " +
-                "password : '' -" +
+                "password : 'admin' -" +
                 "database_name : 'test'";
 
             res.render('connexion_failed', {message: message_fail});
             return;
-        }
+        }*/
 
+        /*
         if (await isAlreadyInDatabase(email_inscription, connection)) {
             if (await isAlreadyInDatabase_password(email_inscription, pw_inscription, connection)) {
+            */
+            if (await _checkLogin(email_inscription, pw_inscription)) {
                 req.session.is_connected = true;
                 req.session.user_email_connected = email_inscription;
                 req.session.user_password_connected = pw_inscription;
@@ -50,11 +57,13 @@ router.post('/', function(req, res)
                 const message_fail = "Sorry. Email found in our database but wrong password.";
                 res.render('connection_failed', {message: message_fail});
             }
+            /*
         } else {
             const message_fail = "Sorry we cannot find this email in our database :" + email_inscription;
             res.render('connection_failed', {message: message_fail});
         }
-    });
+        */
+    //});
 });
 
 function isAlreadyInDatabase(email, connection) {

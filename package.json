@@ -11,15 +11,17 @@
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "firebase": "^7.10.0",
     "googleapis": "^48.0.0",
     "http-errors": "^1.7.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "open": "^7.0.2",
     "pug": "^2.0.4",
+    "puppeteer": "^2.1.1",
     "query-string": "^6.11.1",
-    "server-destroy": "^1.0.1",
-    "sync-mysql": "^3.0.1"
+    "request": "^2.88.2",
+    "server-destroy": "^1.0.1"
   },
   "devDependencies": {
     "acorn": "^7.1.1",
