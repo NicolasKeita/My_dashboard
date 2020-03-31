@@ -1,0 +1,25 @@
+{
+  "services": [
+    {
+      "name": "Youtube",
+      "widgets": [
+        {
+          "name": "channel_information",
+          "description": "Fetch information about any Youtube channel"
+        },
+        {
+          "name": "video_information",
+          "description": "Fetch information about any Youtube video"
+        }
+      ]
+    },
+    {
+      "name": "Google Map",
+      "widgets": [
+        {
+          "name": "find_a_place",
+          "description": "Using latitude and longitude, display a localisation on a map"
+        }
+      ]
+    }]
+}
