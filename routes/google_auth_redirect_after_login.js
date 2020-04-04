@@ -6,7 +6,7 @@ const keys = require('../google_api_key_oauth2');
 
 router.get('/', async function(req, res)
 {
-    const qs = new url.URL(req.url, 'http://my-area-server2:8080')
+    const qs = new url.URL(req.url, 'http://my-area-server2.com:8080')
         .searchParams;
     const code = qs.get('code');
 
@@ -37,13 +37,11 @@ router.get('/', async function(req, res)
             resolve();
         });
     });
-
-
-
-    res.redirect("dashboard");
+    res.redirect("connection");
 });
 
-router.post('/', function(req, res) {
+router.post('/', function(req, res)
+{
   res.end('This is a POST');
 });
 

@@ -1,5 +1,3 @@
-//const
-
 let map;
 function initMap() {
     let inputLatitude = document.getElementById("inputLatitude").value;

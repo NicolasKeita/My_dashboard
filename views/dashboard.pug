@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    meta(http-equiv='refresh' content='30; URL=http://my-area-server2.com:8080/dashboard')
     .dashboard_title
         h3 Votre dashboard - USERNAME : #{user_mail}
         a(href='disconnection') disconnection
@@ -38,3 +39,4 @@ block content
             form(method='POST' action='/movieWidget')
                 input(name='searchText' placeholder='Movie')
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkYEWeSY7HOuKVfrp2f2Ppq_Lqk74Xrk&callback=initMap' async='' defer='')
+

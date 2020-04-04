@@ -6,9 +6,7 @@ const _checkLogin = require('../public/js/connexion');
 
 router.get('/', function(req, res) {
     if (req.session.is_connected) {
-        res.render('dashboard', {
-            user_mail: req.session.user_email_connected
-        });
+        res.redirect('widget_selection');
     } else {
         res.render('connection', {
             title: 'Nicolas Super Dashboard',
@@ -52,7 +50,7 @@ router.post('/', async function(req, res)
                 req.session.is_connected = true;
                 req.session.user_email_connected = email_inscription;
                 req.session.user_password_connected = pw_inscription;
-                res.redirect('dashboard');
+                res.redirect('widget_selection');
             } else {
                 const message_fail = "Sorry. Email found in our database but wrong password.";
                 res.render('connection_failed', {message: message_fail});

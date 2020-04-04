@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    h3 Votre Selection Widget - dashboard - USERNAME : #{user_mail}
+
+    .p-t-2
+    .flex-c
+        h2 Widget 1 :
+        select(id='widget1_chose')
+            option(value='') --Please choose an option--
+            option(value='channel_information') Youtube channel Information
+            option(value='video_information') Youtube video Information
+            option(value='find_a_place') Google Map
+    .flex-c
+        h2 Widget 2 :
+        select(id='widget2_chose')
+            option(value='') --Please choose an option--
+            option(value='channel_information') Youtube channel Information
+            option(value='video_information') Youtube video Information
+            option(value='find_a_place') Google Map
+    .flex-c
+        h2 Widget 3 :
+        select(id='widget3_chose')
+            option(value='') --Please choose an option--
+            option(value='channel_information') Youtube channel Information
+            option(value='video_information') Youtube video Information
+            option(value='find_a_place') Google Map
+
+    button(onclick='widget3_selection()') Access to the dashboard
+    script(src='/js/widget_selection.js')
+
