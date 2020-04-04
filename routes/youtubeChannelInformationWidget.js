@@ -41,6 +41,9 @@ router.post('/', async function(req, res)
 
     res.render('dashboard', {
         user_mail: req.session.user_email_connected,
+        widget1: req.session.widget1,
+        widget2: req.session.widget2,
+        widget3: req.session.widget3,
         channelViewCount : channelViewCount,
         channelSubscriberCount : channelSubscriberCount,
         channelVideoCount : channelVideoCount

@@ -32,7 +32,6 @@ router.post('/', async function(req, res)
                 return;
             }
             let channels = response.data.items;
-            console.log(channels);
             if (channels.length !== 0) {
                 youtubeVideoId = channels[0].id.videoId;
                 youtubeVideoPublishedDate = channels[0].snippet.publishedAt;
@@ -45,6 +44,9 @@ router.post('/', async function(req, res)
 
     res.render('dashboard', {
         user_mail: req.session.user_email_connected,
+        widget1: req.session.widget1,
+        widget2: req.session.widget2,
+        widget3: req.session.widget3,
         youtubeVideoId : youtubeVideoId,
         youtubeVideoPublishedDate : youtubeVideoPublishedDate,
         youtubeVideoTitle : youtubeVideoTitle,
