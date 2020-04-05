@@ -15,17 +15,15 @@ router.post('/', async function(req, res)
 
     let service = google.youtube('v3');
 
-    let youtubeVideoId = "Not Found";
-    let youtubeVideoPublishedDate = "Not Found";
-    let youtubeVideoTitle = "Not Found";
-    let youtubeVideoChannelTitle = "Not Found";
+    let channelViewCount = "Not Found";
+    let channelSubscriberCount = "Not Found";
+    let channelVideoCount = "Not Found";
 
     await new Promise((resolve) => {
-        service.search.list({
+        service.channels.list({
             auth: oAuth2Client,
-            type: 'video',
-            part: 'snippet',
-            q: req.body.searchText
+            part: 'snippet,contentDetails,statistics',
+            forUsername: req.body.searchText
         }, function (err, response) {
             if (err) {
                 console.error('The API returned an error: ' + err);
@@ -33,10 +31,9 @@ router.post('/', async function(req, res)
             }
             let channels = response.data.items;
             if (channels.length !== 0) {
-                youtubeVideoId = channels[0].id.videoId;
-                youtubeVideoPublishedDate = channels[0].snippet.publishedAt;
-                youtubeVideoTitle = channels[0].snippet.title;
-                youtubeVideoChannelTitle = channels[0].snippet.channelTitle;
+                channelViewCount = channels[0].statistics.viewCount;
+                channelSubscriberCount = channels[0].statistics.subscriberCount;
+                channelVideoCount = channels[0].statistics.videoCount;
             }
             resolve();
         });
@@ -47,10 +44,9 @@ router.post('/', async function(req, res)
         widget1: req.session.widget1,
         widget2: req.session.widget2,
         widget3: req.session.widget3,
-        youtubeVideoId : youtubeVideoId,
-        youtubeVideoPublishedDate : youtubeVideoPublishedDate,
-        youtubeVideoTitle : youtubeVideoTitle,
-        youtubeVideoChannelTitle : youtubeVideoChannelTitle
+        channelViewCount_1 : channelViewCount,
+        channelSubscriberCount_1 : channelSubscriberCount,
+        channelVideoCount_1 : channelVideoCount
     });
 });
 

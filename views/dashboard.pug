@@ -11,98 +11,96 @@ block content
         .dashB_widget1
            - if (widget1 === "channel_information") {
                 h3.text-white Youtube - Channel Information
-                form(method='POST' action='/youtubeChannelInformationWidget')
+                form(method='POST' action='/youtubeChannelInformationWidget_1')
                     input(name='searchText' placeholder='channel name')
-                - if (typeof(channelViewCount) !== 'undefined') {
-                    h3.p-t-50.text-white This Youtube channel has #{channelViewCount} views
-                    h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount} subscribers
-                    h3.p-t-50.text-white This Youtube channel has #{channelVideoCount} videos
+                - if (typeof(channelViewCount_1) !== 'undefined') {
+                    h3.p-t-50.text-white This Youtube channel has #{channelViewCount_1} views
+                    h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount_1} subscribers
+                    h3.p-t-50.text-white This Youtube channel has #{channelVideoCount_1} videos
                 - }
            - }
            - if (widget1 === "video_information") {
                 h3.text-white Youtube - Video Information
-                form(method='POST' action='/youtubeVideoInformationWidget')
+                form(method='POST' action='/youtubeVideoInformationWidget_1')
                     input(name='searchText' placeholder='video name')
-                - if (typeof(youtubeVideoTitle) !== 'undefined') {
-                    h3.p-t-50.text-white Video title: #{youtubeVideoTitle}
-                    h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate}
-                    h3.p-t-50.text-white Video ID: #{youtubeVideoId}
-                    h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle}
+                - if (typeof(youtubeVideoTitle_1) !== 'undefined') {
+                    h3.p-t-50.text-white Video title: #{youtubeVideoTitle_1}
+                    h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate_1}
+                    h3.p-t-50.text-white Video ID: #{youtubeVideoId_1}
+                    h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle_1}
                 - }
            - }
            - if (widget1 === "find_a_place") {
                 h3.text-white GoogleMap
-                input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude")
-                input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude")
+                input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude_1")
+                input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude_1")
                 button(type='button' onclick='initMap();') Locate
-                script(src='/js/youtubeViewCountWidget.js')
                 #map
            - }
         .dashB_widget2
            - if (widget2 === "channel_information") {
                 h3.text-white Youtube - Channel Information
-                form(method='POST' action='/youtubeChannelInformationWidget')
+                form(method='POST' action='/youtubeChannelInformationWidget_2')
                     input(name='searchText' placeholder='channel name')
-                - if (typeof(channelViewCount) !== 'undefined') {
-                    h3.p-t-50.text-white This Youtube channel has #{channelViewCount} views
-                    h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount} subscribers
-                    h3.p-t-50.text-white This Youtube channel has #{channelVideoCount} videos
+                - if (typeof(channelViewCount_2) !== 'undefined') {
+                    h3.p-t-50.text-white This Youtube channel has #{channelViewCount_2} views
+                    h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount_2} subscribers
+                    h3.p-t-50.text-white This Youtube channel has #{channelVideoCount_2} videos
                 - }
            - }
            - if (widget2 === "video_information") {
                 h3.text-white Youtube - Video Information
-                form(method='POST' action='/youtubeVideoInformationWidget')
+                form(method='POST' action='/youtubeVideoInformationWidget_2')
                     input(name='searchText' placeholder='video name')
-                - if (typeof(youtubeVideoTitle) !== 'undefined') {
-                    h3.p-t-50.text-white Video title: #{youtubeVideoTitle}
-                    h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate}
-                    h3.p-t-50.text-white Video ID: #{youtubeVideoId}
-                    h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle}
+                - if (typeof(youtubeVideoTitle_2) !== 'undefined') {
+                    h3.p-t-50.text-white Video title: #{youtubeVideoTitle_2}
+                    h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate_2}
+                    h3.p-t-50.text-white Video ID: #{youtubeVideoId_2}
+                    h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle_2}
                 - }
            - }
            - if (widget2 === "find_a_place") {
                 h3.text-white GoogleMap
-                input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude")
-                input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude")
+                input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude_2")
+                input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude_2")
                 button(type='button' onclick='initMap();') Locate
-                script(src='/js/youtubeViewCountWidget.js')
                 #map
            - }
     .dashboard_container_widgets
         .dashB_widget3
            - if (widget3 === "channel_information") {
                 h3.text-white Youtube - Channel Information
-                form(method='POST' action='/youtubeChannelInformationWidget')
+                form(method='POST' action='/youtubeChannelInformationWidget_3')
                     input(name='searchText' placeholder='channel name')
-                - if (typeof(channelViewCount) !== 'undefined') {
-                    h3.p-t-50.text-white This Youtube channel has #{channelViewCount} views
-                    h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount} subscribers
-                    h3.p-t-50.text-white This Youtube channel has #{channelVideoCount} videos
+                - if (typeof(channelViewCount_3) !== 'undefined') {
+                    h3.p-t-50.text-white This Youtube channel has #{channelViewCount_3} views
+                    h3.p-t-50.text-white This Youtube channel has #{channelSubscriberCount_3} subscribers
+                    h3.p-t-50.text-white This Youtube channel has #{channelVideoCount_3} videos
                 - }
            - }
            - if (widget3 === "video_information") {
                 h3.text-white Youtube - Video Information
-                form(method='POST' action='/youtubeVideoInformationWidget')
+                form(method='POST' action='/youtubeVideoInformationWidget_3')
                     input(name='searchText' placeholder='video name')
-                - if (typeof(youtubeVideoTitle) !== 'undefined') {
-                    h3.p-t-50.text-white Video title: #{youtubeVideoTitle}
-                    h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate}
-                    h3.p-t-50.text-white Video ID: #{youtubeVideoId}
-                    h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle}
+                - if (typeof(youtubeVideoTitle_3) !== 'undefined') {
+                    h3.p-t-50.text-white Video title: #{youtubeVideoTitle_3}
+                    h3.p-t-50.text-white Video publication date: #{youtubeVideoPublishedDate_3}
+                    h3.p-t-50.text-white Video ID: #{youtubeVideoId_3}
+                    h3.p-t-50.text-white Channel Title (owner): #{youtubeVideoChannelTitle_3}
                 - }
            - }
            - if (widget3 === "find_a_place") {
                 h3.text-white GoogleMap
-                input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude")
-                input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude")
+                input.p-b-2(name='searchTextLatitude' placeholder='Latitude' id="inputLatitude_3")
+                input.pb-2(name='searchTextLongitude' placeholder='Longitude' id="inputLongitude_3")
                 button(type='button' onclick='initMap();') Locate
-                script(src='/js/youtubeViewCountWidget.js')
-                #map
+                div#map
            - }
         .dashB_widget4
             h3.text-white Movie or Weather
             form(method='POST' action='/movieWidget')
                 input(name='searchText' placeholder='Movie')
 
+    script(src='/js/youtubeViewCountWidget_1.js')
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkYEWeSY7HOuKVfrp2f2Ppq_Lqk74Xrk&callback=initMap' async='' defer='')
 

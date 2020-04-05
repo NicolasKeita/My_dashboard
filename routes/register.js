@@ -5,9 +5,7 @@ const _checkRegister = require('../public/js/register');
 
 router.get('/', function(req, res) {
     if (req.session.is_connected) {
-        res.render('dashboard', {
-            user_mail: req.session.user_email_connected
-        });
+        res.redirect('connection');
     } else {
         res.render('register', {
             title: 'Nicolas Super Dashboard',
@@ -42,9 +40,7 @@ router.post('/', async function(req, res) {
         req.session.user_email_connected = email_inscription;
         req.session.user_password_connected = pw_inscription;
         req.session.is_connected = true;
-        res.render('dashboard', {
-            user_mail: req.session.user_email_connected
-        });
+        res.redirect('connection');
     } else {
         const message_fail = "This user already exist in our database :" + email_inscription;
         res.render('connection_failed', {message: message_fail});

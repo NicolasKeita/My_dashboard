@@ -15,15 +15,17 @@ router.post('/', async function(req, res)
 
     let service = google.youtube('v3');
 
-    let channelViewCount = "Not Found";
-    let channelSubscriberCount = "Not Found";
-    let channelVideoCount = "Not Found";
+    let youtubeVideoId = "Not Found";
+    let youtubeVideoPublishedDate = "Not Found";
+    let youtubeVideoTitle = "Not Found";
+    let youtubeVideoChannelTitle = "Not Found";
 
     await new Promise((resolve) => {
-        service.channels.list({
+        service.search.list({
             auth: oAuth2Client,
-            part: 'snippet,contentDetails,statistics',
-            forUsername: req.body.searchText
+            type: 'video',
+            part: 'snippet',
+            q: req.body.searchText
         }, function (err, response) {
             if (err) {
                 console.error('The API returned an error: ' + err);
@@ -31,9 +33,10 @@ router.post('/', async function(req, res)
             }
             let channels = response.data.items;
             if (channels.length !== 0) {
-                channelViewCount = channels[0].statistics.viewCount;
-                channelSubscriberCount = channels[0].statistics.subscriberCount;
-                channelVideoCount = channels[0].statistics.videoCount;
+                youtubeVideoId = channels[0].id.videoId;
+                youtubeVideoPublishedDate = channels[0].snippet.publishedAt;
+                youtubeVideoTitle = channels[0].snippet.title;
+                youtubeVideoChannelTitle = channels[0].snippet.channelTitle;
             }
             resolve();
         });
@@ -44,9 +47,10 @@ router.post('/', async function(req, res)
         widget1: req.session.widget1,
         widget2: req.session.widget2,
         widget3: req.session.widget3,
-        channelViewCount : channelViewCount,
-        channelSubscriberCount : channelSubscriberCount,
-        channelVideoCount : channelVideoCount
+        youtubeVideoId_1 : youtubeVideoId,
+        youtubeVideoPublishedDate_1 : youtubeVideoPublishedDate,
+        youtubeVideoTitle_1 : youtubeVideoTitle,
+        youtubeVideoChannelTitle_1 : youtubeVideoChannelTitle
     });
 });
 
