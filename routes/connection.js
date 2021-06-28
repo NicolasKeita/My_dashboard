@@ -4,10 +4,22 @@ const mysql   = require('mysql');
 const _checkRegister = require('../public/js/register');
 const _checkLogin = require('../public/js/connexion');
 
+function isModalAccepted(req) {
+    console.log('Cookieees', req.cookies);
+    return true;
+}
+
 router.get('/', function(req, res) {
     if (req.session.is_connected) {
         res.redirect('widget_selection');
     } else {
+        isModalAccepted(req);
+        const cookieOptions = {
+            maxAge : 1000 * 60 * 15, // would expire after 15 minutes
+            httpOnly: true,
+        }
+        //res.cookie('cookie_name2', "cookie_value2", cookieOptions);
+
         res.render('connection', {
             title: 'Nicolas Super Dashboard',
             title_sub: 'Hard work beats talent every time'

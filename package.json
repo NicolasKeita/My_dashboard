@@ -19,16 +19,17 @@
     "open": "^7.4.2",
     "pug": "^3.0.1",
     "query-string": "^6.14.1",
+    "react-modal": "^3.14.3",
     "request": "^2.88.2",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {
-    "@types/express": "^4.17.12",
     "@firebase/util": ">=0.3.4",
+    "@types/express": "^4.17.12",
+    "acorn": "^7.4.1",
     "json-bigint": ">=1.0.0",
-    "node-forge": ">=0.10.0",
-    "node-fetch": ">=2.6.1",
     "lodash": ">=4.17.21",
-    "acorn": "^7.4.1"
+    "node-fetch": ">=2.6.1",
+    "node-forge": ">=0.10.0"
   }
 }
