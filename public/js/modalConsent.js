@@ -10,9 +10,11 @@ function Pop() {
     let fadeOutTime = 10;
     let cookie = {
         name: "cookieconsent_status",
-        path: "/",
+        value: "ok",
+        path: "/", // make it accessible from all pages
         expiryDays: 6 * 24 * 60 * 60 * 1000,
     };
+
     let content = {
         message: "This website uses cookies to ensure you get the best experience on our website.",
         btnText: "Got it!",
@@ -23,6 +25,10 @@ function Pop() {
         href: "https://www.cookiesandyou.com",
         target: "_blank",
     };
+//    if (navigator.language)
+    console.log("En bas langage :");
+    console.log(navigator.language);
+
     let createPopUp = function() {
         if (typeof conDivObj === "undefined") {
             conDivObj = document.createElement("DIV");
@@ -80,13 +86,10 @@ function Pop() {
     let saveCookie = function() {
         let expires = new Date();
         expires.setTime(expires.getTime() + cookie.expiryDays);
-        document.cookie = cookie.name +
-            "=" +
-            "ok" +
-            ";expires=" +
-            expires.toUTCString() +
-            "path=" +
-            cookie.path;
+        document.cookie = cookie.name + "=" + cookie.value +
+            ";expires=" + expires.toUTCString() +
+            "path=" + cookie.path +
+            ";secure";
     };
     this.init = function() {
         if (checkCookie(cookie.name)) return;
