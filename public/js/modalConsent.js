@@ -12,9 +12,8 @@ function Pop() {
         name: "cookieconsent_status",
         value: "ok",
         path: "/", // make it accessible from all pages
-        expiryDays: (6 * 24 * 60 * 60 * 1000) + (2 * 60 * 60 * 1000), // 6 days + 2 hours: because of GMT+2
+        expiryDays: 6 * 24 * 60 * 60 * 1000, // 6 days
     };
-
     let content = {
         message: "This website uses cookies to ensure you get the best experience on our website.",
         btnText: "Got it!",
@@ -31,7 +30,6 @@ function Pop() {
         content.btnText = "J'ai compris";
         content.link = "En savoir plus";
     }
-
     let createPopUp = function() {
         if (typeof conDivObj === "undefined") {
             conDivObj = document.createElement("DIV");
@@ -99,4 +97,7 @@ function Pop() {
         }, 5 * 1000);
     };
 }
-window.start = new Pop();
+window.onload = () => {
+    let modal = new Pop();
+    modal.init();
+}
