@@ -12,7 +12,7 @@ function Pop() {
         name: "cookieconsent_status",
         value: "ok",
         path: "/", // make it accessible from all pages
-        expiryDays: 6 * 24 * 60 * 60 * 1000,
+        expiryDays: (6 * 24 * 60 * 60 * 1000) + (2 * 60 * 60 * 1000), // 6 days + 2 hours: because of GMT+2
     };
 
     let content = {
@@ -25,9 +25,12 @@ function Pop() {
         href: "https://www.cookiesandyou.com",
         target: "_blank",
     };
-//    if (navigator.language)
-    console.log("En bas langage :");
-    console.log(navigator.language);
+    let userLangage = navigator.language;
+    if (userLangage.includes("fr")) {
+        content.message = "Ce site internet utilise des cookies pour vous garantir la meilleure expérience sur notre site.";
+        content.btnText = "J'ai compris";
+        content.link = "En savoir plus";
+    }
 
     let createPopUp = function() {
         if (typeof conDivObj === "undefined") {
@@ -36,9 +39,7 @@ function Pop() {
             conDivObj.setAttribute("id", "spopupCont");
         }
         conDivObj.innerHTML = '<div id="poper" class="window ' +
-            content.mode +
-            content.theme +
-            content.palette +
+            content.mode + content.theme + content.palette +
             '"><span id="msg" class="message">' +
             content.message +
             '<a id="plcy-lnk" class="policylink" href="' +
