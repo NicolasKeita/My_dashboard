@@ -21,8 +21,8 @@ router.get('/', function(req, res) {
         //res.cookie('cookie_name2', "cookie_value2", cookieOptions);
 
         res.render('connection', {
-            title: 'Nicolas Super Dashboard',
-            title_sub: 'Hard work beats talent every time'
+            title: 'My_Dashboard',
+            title_sub: 'GoogleMap, Youtube management, Weather, etc'
         });
     }
 });

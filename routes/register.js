@@ -8,8 +8,8 @@ router.get('/', function(req, res) {
         res.redirect('connection');
     } else {
         res.render('register', {
-            title: 'Nicolas Super Dashboard',
-            title_sub: 'Hard work beats talent every time'
+            title: 'My_Dashboard',
+            title_sub: 'GoogleMap, Youtube management, Weather, etc'
         });
     }
 });
