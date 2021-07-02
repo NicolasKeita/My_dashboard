@@ -94,7 +94,7 @@ function Pop() {
         if (checkCookie(cookie.name)) return;
         setTimeout(function() {
             createPopUp();
-        }, 5 * 1000);
+        }, 5 * 1000); // 5 seconds before displaying the modal
     };
 }
 window.onload = () => {
